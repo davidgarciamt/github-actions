@@ -1,0 +1,36 @@
+name: Format Code
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Prettier to format code
+        run: npx prettier --write .
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "formatting code with Prettier"
+          branch: "auto/code-formatting"
+          title: "Code Formatting with Prettier"
+          body: |
+            This pull request contains code formatting changes made by Prettier.
+            Please review the changes before merging.

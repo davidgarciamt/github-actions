@@ -1,0 +1,2 @@
+{"name":"John","age":30,"city":"New York","hobbies":["reading","traveling","swimming"],"education":{"degree":"Bachelors","year":2010,"institution":"University of Example"},
+"experience":[{"jobTitle":"Developer","years":5},{"jobTitle":"Senior Developer","years":3}]}
