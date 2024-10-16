@@ -23,8 +23,8 @@ jobs:
 
       - name: Configure Git
         run: |
-          git config user.name "davidgarciamt"
-          git config user.email "david.garcia@softwaresolutionssouthwest.com"
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Fetch all branches
         run: git fetch --all
