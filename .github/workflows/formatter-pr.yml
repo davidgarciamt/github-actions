@@ -21,16 +21,35 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Fetch all branches
+        run: git fetch --all
+
+      - name: Update local main
+        run: git checkout main && git pull origin main
+
+      - name: Create and switch to new branch
+        run: git checkout -b auto/code-formatting
+
       - name: Run Prettier to format code
         run: npx prettier --write .
 
+      - name: Stage changes
+        run: |
+          git add . -- :/ ':!package-lock.json'
+          git reset package-lock.json
+
+      - name: Commit changes
+        run: |
+          git commit -m "Apply Prettier formatting dev" || echo "No changes to commit"
+          git branch
+          git rev-parse --abbrev-ref HEAD
+
+      - name: Push branch
+        run: |
+          git push origin auto/code-formatting
+
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "formatting code with Prettier"
-          branch: "auto/code-formatting"
-          title: "Code Formatting with Prettier"
-          body: |
-            This pull request contains code formatting changes made by Prettier.
-            Please review the changes before merging.
+        run: |
+          gh pr create --base main --head auto/code-formatting --title "Apply Prettier formatting to main" --body "Automated formatting to main"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
