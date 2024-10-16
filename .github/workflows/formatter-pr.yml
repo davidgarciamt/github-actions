@@ -27,8 +27,12 @@ jobs:
       - name: Update local main
         run: git checkout main && git pull origin main
 
+      - name: Generate timestamp
+        id: vars
+        run: echo "BRANCH_SUFFIX=$(date +'%Y%m%d-%H%M%S')" >> $GITHUB_ENV
+
       - name: Create and switch to new branch
-        run: git checkout -b auto/code-formatting
+        run: git checkout -b auto/code-formatting-${{ env.BRANCH_SUFFIX }}
 
       - name: Run Prettier to format code
         run: npx prettier --write "**/*.{js,json,html,css}"
@@ -46,10 +50,10 @@ jobs:
 
       - name: Push branch
         run: |
-          git push origin auto/code-formatting
+          git push origin auto/code-formatting-${{ env.BRANCH_SUFFIX }}
 
       - name: Create Pull Request
         run: |
-          gh pr create --base main --head auto/code-formatting --title "Apply Prettier formatting to main" --body "Automated formatting to main"
+          gh pr create --base main --head auto/code-formatting-${{ env.BRANCH_SUFFIX }} --title "Apply Prettier formatting to main" --body "Automated formatting to main"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
