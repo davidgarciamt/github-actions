@@ -21,6 +21,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Configure Git
+        run: |
+          git config user.name "davidgarciamt"
+          git config user.email "david.garcia@softwaresolutionssouthwest.com"
+
       - name: Fetch all branches
         run: git fetch --all
 
