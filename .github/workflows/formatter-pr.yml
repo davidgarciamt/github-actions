@@ -31,7 +31,7 @@ jobs:
         run: git checkout -b auto/code-formatting
 
       - name: Run Prettier to format code
-        run: npx prettier --write .
+        run: npx prettier --write "**/*.{js,json,html,css}"
 
       - name: Stage changes
         run: |
@@ -40,7 +40,7 @@ jobs:
 
       - name: Commit changes
         run: |
-          git commit -m "Apply Prettier formatting dev" || echo "No changes to commit"
+          git commit -m "Apply Prettier formatting main" || echo "No changes to commit"
           git branch
           git rev-parse --abbrev-ref HEAD
 
