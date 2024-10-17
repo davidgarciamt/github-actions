@@ -6,3 +6,10 @@ function calculateSum(a,b){ return a + b;} let sum=calculateSum(4 , 5);
 for(let i=0;i<10;i++){console.log('Number:',i);}
 const obj={name:'John',age:30};console.log(obj.name,obj.age);
 if(x>y){console.log('x is greater');}else{console.log('y is greater');}
+
+const variable1 = 1
+const variable2 = 1 ;
+const variable3   = 1
+const variable4=1
+const variable5= 1
+const variable6= 1                          
