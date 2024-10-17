@@ -22,7 +22,7 @@ jobs:
         run: npm install
 
       - name: Run Prettier to format code
-        run: npx prettier --write .
+        run: npx prettier --write "**/*.{js,json,html}"
 
       - name: Commit and push changes
         run: |
