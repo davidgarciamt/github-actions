@@ -40,7 +40,7 @@ jobs:
         run: git checkout -b auto/code-formatting-${{ env.BRANCH_SUFFIX }}
 
       - name: Run Prettier to format code
-        run: npx prettier --write "**/*.{js,json,html,py}"
+        run: npx prettier --write "**/*.{js,json,html}"
 
       - name: Stage changes
         run: |
